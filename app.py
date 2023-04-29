@@ -1,5 +1,5 @@
 from flask import Flask, send_file, request
-from getimages import get_animal_info
+from get_query_urls import get_query_urls
 
 
 app = Flask(__name__)
@@ -11,9 +11,7 @@ def open_file_print():
 
 
 @app.get("/info")
-def get_animal_info_dicts():
+def get_urls():
     number = int(request.args.get("number"))
-    info = []
-    for x in range(number):
-        info.append(get_animal_info())
-    return info
+    return get_query_urls(number)
+    
