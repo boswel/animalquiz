@@ -30,15 +30,23 @@ async function get_label(query_url) {
 async function get_info(int) {
   let urls = await get_query_urls(int);
   
-  let info = [];
+  let info_promises = []; 
 
   for (let item of urls) {
-    let image_url = await get_image_url(item['image_query_url']);
-    let label = await get_label(item['label_query_url']);
+    info_promises.push(get_image_url(item['image_query_url']));
+    info_promises.push(get_label(item['label_query_url']));
 
-    info.push({'image_url': image_url, 'label': label})
   }
+  
+  let results = await Promise.all(info_promises);
 
+  let info = []; 
+
+  for (let i = 0; i < results.length; i += 2) {
+    let obj = {'image_url': results[i], 'label': results[i + 1]};
+    info.push(obj);
+  }
+  
   return info;
 }
 
