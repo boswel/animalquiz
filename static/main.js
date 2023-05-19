@@ -51,16 +51,32 @@ async function get_info(int) {
 }
 
 
-let images = await get_info(9);
+let animalInfos = await get_info(9);
+
+let animalName = document.getElementById("animal-name");
+let target = animalInfos[Math.floor(Math.random() * 9)];
+animalName.textContent = target.label;
 
 let imageContainer = document.getElementById("image-container");
 
-for (let image of images) {
+function evaluateAnswer(info, target, img) {
+	if (info.label === target.label) {
+		img.classList.add('correct');
+	}
+	else {
+		img.classList.add('incorrect');
+	}
+  }
+
+for (let info of animalInfos) {
   let img = document.createElement('img');
-  img.src = image['image_url'];
+  img.src = info['image_url'];
   img.classList = "image";
+  
   let div = document.createElement('div');
-  div.appendChild(img)
+  div.appendChild(img);
   imageContainer.appendChild(div);
+  
+  img.addEventListener('click', () => evaluateAnswer(info, target, img));  
 }
 
