@@ -10,11 +10,19 @@ html {
   display: grid;
   grid-template-columns: 320px 320px 320px;
   grid-template-rows: 15rem 15rem 15rem;
-  column-gap: 1em;
-  row-gap: 1em;
+  gap: 1em;
+}
+
+#image-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border: 1em solid black;
 }
 
 .image {
   max-width: 100%;
   max-height: 100%;
+  
 }

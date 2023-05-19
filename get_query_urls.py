@@ -15,5 +15,5 @@ def get_query_urls(number):
         query_label = base_url + "/entities/items/" + id + "/labels/en"
         
         urls.append({"image_query_url": query_image, "label_query_url": query_label})
-
+    print(urls)
     return urls

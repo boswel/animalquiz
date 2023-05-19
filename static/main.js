@@ -59,6 +59,8 @@ for (let image of images) {
   let img = document.createElement('img');
   img.src = image['image_url'];
   img.classList = "image";
-  imageContainer.appendChild(img);
+  let div = document.createElement('div');
+  div.appendChild(img)
+  imageContainer.appendChild(div);
 }
 
