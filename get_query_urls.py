@@ -13,7 +13,8 @@ def get_query_urls(number):
     for id in ids:          
         query_image = base_url + "/entities/items/" + id + "/statements?property=P18" 
         query_label = base_url + "/entities/items/" + id + "/labels/en"
-        
-        urls.append({"image_query_url": query_image, "label_query_url": query_label})
+        query_article = base_url + "/entities/items/" + id + "/sitelinks/enwiki/url"
+
+        urls.append({"image_query_url": query_image, "label_query_url": query_label, "wiki_url": query_article})
     print(urls)
     return urls

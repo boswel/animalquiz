@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +9,28 @@
   <script src="static/main.js" type="module"></script>
   <title>AnimalQuiz</title>
 </head>
+
 <body>
   <div id="container">
     <h1>Animal Quiz</h1>
     <br>
-    <p>Which of the pictures shows (something related to) <span id="animal-name"></span>?</p>
-    <div id="image-container"></div>
-  </div>  
+    <p>Which of the pictures shows (something related to) the <span class="animal-name"></span>?</p>
+    <div id="image-container">
+      <div id="images"></div>
+      <div hidden id="eval-neg" class="eval">Try again!
+      </div>
+      <div hidden id="eval-pos" class="eval">
+        That's correct!
+        <br>
+        You can find more information on the
+        <span class="animal-name"></span>
+        <a href="">here</a>.
+        <br>
+        <button id="again">Play again</button>
+      </div>
+    </div>
+
+  </div>
 </body>
+
 </html>

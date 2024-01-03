@@ -1,5 +1,11 @@
 html {
   margin: 0;
+  font-family: sans-serif;
+}
+
+#container {
+  max-width: 960px;
+  margin: auto;
 }
 
 #animal-name {
@@ -7,18 +13,23 @@ html {
 }
 
 #image-container {
+  position: relative;
+}
+
+#images {
   display: grid;
-  grid-template-columns: 320px 320px 320px;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 15rem 15rem 15rem;
   gap: 1em;
 }
 
-#image-container div {
+#images div {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: black;
   border: 1em solid black;
+  border-radius: 2px;
 }
 
 .image {
@@ -27,9 +38,31 @@ html {
 }
 
 .correct {
-	border: 5px solid green;
+  border: 5px solid green;
+  border-radius: 2px;
 }
 
 .incorrect {
-	border: 5px solid darkred;
+  border: 5px solid darkred;
+  border-radius: 2px;
+}
+
+#eval-pos,
+#eval-neg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 30%;
+  background-color: white;
+  border: 2px solid darkgrey;
+  border-radius: 2px;
+  box-shadow: grey;
+  padding: 1em;
+  text-align: center;
+}
+
+#again {
+  margin: 1rem;
+  font-size: 1rem;
 }
