@@ -21,16 +21,13 @@ for (let name of animalNames) {
 for (let info of animalInfos) {
   let img = document.createElement('img');
   img.src = info['image_url'];
-  img.classList = "image";  // Q: was that "" on purpose? because of "" in html?
+  img.classList.add('image');
 
   let div = document.createElement('div');
   div.appendChild(img);
   images.appendChild(div);
 
   img.addEventListener('click', () => {
-    console.log(info)
-    console.log(info.label, target.label)
-    console.log(info.label === target.label)
     if (info.label === target.label) {
       img.classList.add('correct');
       evalPos.hidden = false;
@@ -40,7 +37,6 @@ for (let info of animalInfos) {
       evalNeg.hidden = false;
 
       setTimeout(() => { evalNeg.hidden = true }, 1000);
-      // TODO: set delay for setting hidden = true again
     }
   });
 }

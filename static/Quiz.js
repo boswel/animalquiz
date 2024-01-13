@@ -11,7 +11,6 @@ export class Quiz {
     async get_query_urls() {
         return fetch('/info?number=' + this.numberOfPictures)
             .then(response => response.json())
-            .then(json => console.log(json))
     }
 
     async get_image_url(query_url) {
