@@ -9,7 +9,7 @@ let againButton = document.getElementById('again');
 
 let quiz = new Quiz();
 
-let animalInfos = await quiz.get_info(quiz.numberOfPictures);
+let animalInfos = await quiz.get_all_animal_data(quiz.numberOfPictures);
 
 let target = animalInfos[Math.floor(Math.random() * quiz.numberOfPictures)];
 
