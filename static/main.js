@@ -3,6 +3,7 @@ import { Quiz } from './Quiz.js'
 let animalNames = document.querySelectorAll('.animal-name');
 let images = document.getElementById('images');
 let evalPos = document.getElementById('eval-pos');
+let infoLink = document.getElementById('info-link');
 let evalNeg = document.getElementById('eval-neg');
 let againButton = document.getElementById('again');
 
@@ -30,6 +31,7 @@ for (let info of animalInfos) {
   img.addEventListener('click', () => {
     if (info.label === target.label) {
       img.classList.add('correct');
+      infoLink.href = info.wiki_url;
       evalPos.hidden = false;
     }
     else {
