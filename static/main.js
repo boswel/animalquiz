@@ -15,7 +15,9 @@ let animalInfos = await quiz.get_all_animal_data(quiz.numberOfPictures);
 
 let target = animalInfos[Math.floor(Math.random() * quiz.numberOfPictures)];
 
-question.innerHTML = 'Which of the pictures shows (something related to) the <span class="animal-name">' + target.label + '</span>?';
+let animalName = target.hasCommonName ? 'the ' + target.label : '<i>' + target.label + '</i>';
+
+question.innerHTML = 'Which of the pictures shows (something related to) ' + animalName + '?';
 
 for (let info of animalInfos) {
   let img = document.createElement('img');
@@ -29,8 +31,8 @@ for (let info of animalInfos) {
   img.addEventListener('click', () => {
     if (info.label === target.label) {
       img.classList.add('correct');
-      name.textContent = target.label;
-      infoLink.href = info.wiki_url;
+      name.innerHTML = animalName;
+      infoLink.href = info.wiki_url; //TODO: test if undefined, then lead to search enging page
       evalPos.hidden = false;
     }
     else {

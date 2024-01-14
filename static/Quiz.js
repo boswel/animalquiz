@@ -13,8 +13,9 @@ export class Quiz {
             .then(response => response.json())
     }
 
-    async get_single_animal_data(query_url) {
-        return fetch(query_url)
+    async get_single_animal_data(item) {
+
+        return fetch(item.query_url)
             .then(response => response.json())
             .then(object => {
                 let image_name = object['statements']['P18'][0]['value']['content'];
@@ -27,11 +28,27 @@ export class Quiz {
                 let image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/' + md5_1 + '/' + md5_1 + md5_2 + '/' +
                     image_name_underline + '/320px-' + image_name_underline;
 
-                let label = object.labels['en-gb'] || object.labels.en;
+                let possibleLabels = [
+                    object.labels['en-gb'],
+                    object.labels['en-us'],
+                    object.labels.en,
+                    object.aliases?.en && object.aliases.en[0] // returns first false value or last true value
+                ]
 
-                let wiki_url = object?.sitelinks?.enwiki?.url; // null-safe traversal
+                let label = item.species_name;
+                let hasCommonName = false;
 
-                return { image_url, label, wiki_url }; // uses var names to generate key names automatically
+                for (let possibleLabel of possibleLabels) {
+                    if (possibleLabel && possibleLabel !== label) {
+                        label = possibleLabel;
+                        hasCommonName = true;
+                        break;
+                    }
+                }
+
+                let wiki_url = object.sitelinks?.enwiki?.url; // null-safe traversal
+
+                return { image_url, label, wiki_url, hasCommonName }; // uses var names to generate key names automatically
             })
     }
 
@@ -41,7 +58,7 @@ export class Quiz {
         let info_promises = [];
 
         for (let item of urls) {
-            info_promises.push(this.get_single_animal_data(item['query_url']));
+            info_promises.push(this.get_single_animal_data(item));
         }
 
         let results = await Promise.all(info_promises);

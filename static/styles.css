@@ -23,10 +23,6 @@ body {
   padding: 1rem;
 }
 
-.animal-name {
-  font-style: italic;
-}
-
 #image-container {
   /* stretch to fill the rest of the flexbox */
   flex: auto;
