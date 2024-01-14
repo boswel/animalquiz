@@ -1,8 +1,9 @@
 import { Quiz } from './Quiz.js'
 
-let animalNames = document.querySelectorAll('.animal-name');
-let images = document.getElementById('images');
+let question = document.getElementById('question');
+let imageGrid = document.getElementById('image-grid');
 let evalPos = document.getElementById('eval-pos');
+let name = document.getElementById('name');
 let infoLink = document.getElementById('info-link');
 let evalNeg = document.getElementById('eval-neg');
 let againButton = document.getElementById('again');
@@ -14,10 +15,7 @@ let animalInfos = await quiz.get_all_animal_data(quiz.numberOfPictures);
 
 let target = animalInfos[Math.floor(Math.random() * quiz.numberOfPictures)];
 
-for (let name of animalNames) {
-  name.textContent = target.label;
-}
-
+question.innerHTML = 'Which of the pictures shows (something related to) the <span class="animal-name">' + target.label + '</span>?';
 
 for (let info of animalInfos) {
   let img = document.createElement('img');
@@ -26,11 +24,12 @@ for (let info of animalInfos) {
 
   let div = document.createElement('div');
   div.appendChild(img);
-  images.appendChild(div);
+  imageGrid.appendChild(div);
 
   img.addEventListener('click', () => {
     if (info.label === target.label) {
       img.classList.add('correct');
+      name.textContent = target.label;
       infoLink.href = info.wiki_url;
       evalPos.hidden = false;
     }

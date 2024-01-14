@@ -14,16 +14,16 @@
   <div id="container">
     <h1>Animal Quiz</h1>
     <br>
-    <p>Which of the pictures shows (something related to) the <span class="animal-name"></span>?</p>
+    <p id="question"></p>
     <div id="image-container">
-      <div id="images"></div>
+      <div id="image-grid"></div>
       <div hidden id="eval-neg" class="eval">Try again!
       </div>
       <div hidden id="eval-pos" class="eval">
         That's correct!
         <br>
         You can find more information on the
-        <span class="animal-name"></span>
+        <span id="name" class="animal-name"></span>
         <a id="info-link" target="_blank">here</a>.
         <br>
         <button id="again">Play again</button>
