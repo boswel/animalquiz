@@ -22,7 +22,6 @@ question.innerHTML = 'Which of the pictures shows (something related to) ' + ani
 for (let info of animalInfos) {
   let img = document.createElement('img');
   img.src = info['image_url'];
-  img.classList.add('image');
 
   let div = document.createElement('div');
   div.appendChild(img);
