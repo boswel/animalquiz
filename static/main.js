@@ -32,7 +32,7 @@ for (let info of animalInfos) {
     if (info.label === target.label) {
       img.classList.add('correct');
       name.innerHTML = animalName;
-      infoLink.href = info.wiki_url; //TODO: test if undefined, then lead to search enging page
+      infoLink.href = info.wiki_url ? info.wiki_url : 'https://www.ecosia.org/search?method=index&q=' + info.label;
       evalPos.hidden = false;
     }
     else {
