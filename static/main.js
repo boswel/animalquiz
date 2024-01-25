@@ -2,12 +2,13 @@ import { Quiz } from './Quiz.js'
 
 let question = document.getElementById('question');
 let imageGrid = document.getElementById('image-grid');
+let images = imageGrid.getElementsByTagName('img');
+let preventInteraction = document.getElementById('prevent-interaction');
 let evalPos = document.getElementById('eval-pos');
 let name = document.getElementById('name');
 let infoLink = document.getElementById('info-link');
 let evalNeg = document.getElementById('eval-neg');
 let againButton = document.getElementById('again');
-
 
 let quiz = new Quiz();
 
@@ -31,8 +32,8 @@ for (let info of animalInfos) {
     if (info.label === target.label) {
       img.classList.add('correct');
       name.innerHTML = animalName;
-      infoLink.href = info.wiki_url ? info.wiki_url : 'https://www.ecosia.org/search?method=index&q=' + info.label;
-      evalPos.hidden = false;
+      infoLink.href = info.wiki_url || 'https://www.ecosia.org/search?method=index&q=' + info.label;
+      preventInteraction.hidden = false;
     }
     else {
       img.classList.add('incorrect');
