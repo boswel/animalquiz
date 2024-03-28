@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 def get_query_urls(number):
 
@@ -13,6 +14,6 @@ def get_query_urls(number):
         species_name = item['taxonName']
 
         urls.append({'species_name': species_name, 'query_url': query_url}) 
-        
-    return urls
+    
+    return json.dumps(urls)
 

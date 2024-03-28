@@ -1,50 +1,64 @@
-import { Quiz } from './Quiz.js'
+import md5Hex from 'https://cdn.jsdelivr.net/npm/md5-hex@4.0.0/+esm'
+import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/+esm' 
 
-let question = document.getElementById('question');
-let imageGrid = document.getElementById('image-grid');
-let images = imageGrid.getElementsByTagName('img');
-let preventInteraction = document.getElementById('prevent-interaction');
-let evalPos = document.getElementById('eval-pos');
-let name = document.getElementById('name');
-let infoLink = document.getElementById('info-link');
-let evalNeg = document.getElementById('eval-neg');
-let againButton = document.getElementById('again');
-
-let quiz = new Quiz();
-
-let animalInfos = await quiz.get_all_animal_data(quiz.numberOfPictures);
-
-let target = animalInfos[Math.floor(Math.random() * quiz.numberOfPictures)];
-
-let animalName = target.hasCommonName ? 'the ' + target.label : '<i>' + target.label + '</i>';
-
-question.innerHTML = 'Which of the pictures shows (something related to) ' + animalName + '?';
-
-for (let info of animalInfos) {
-  let img = document.createElement('img');
-  img.src = info['image_url'];
-
-  let div = document.createElement('div');
-  div.appendChild(img);
-  imageGrid.appendChild(div);
-
-  img.addEventListener('click', () => {
-    if (info.label === target.label) {
-      img.classList.add('correct');
-      name.innerHTML = animalName;
-      infoLink.href = info.wiki_url || 'https://www.ecosia.org/search?method=index&q=' + info.label;
-      preventInteraction.hidden = false;
-    }
-    else {
-      img.classList.add('incorrect');
-      evalNeg.hidden = false;
-
-      setTimeout(() => { evalNeg.hidden = true }, 1000);
-    }
-  });
+async function get_query_urls(int) {
+    return fetch('/info?number=' + int)
+    .then(response => response.json())
 }
 
+async function get_single_animal_data(item) {
 
-againButton.addEventListener('click', () => {
-  location.reload();
-});
+    return fetch(item.query_url)
+    .then(response => response.json())
+    .then(object => {
+        let image_name = object['statements']['P18'][0]['value']['content'];
+        let image_name_underline = image_name.replaceAll(' ', '_');
+
+        let md5 = md5Hex(image_name_underline);
+        let md5_1 = md5[0];
+        let md5_2 = md5[1];
+
+        let image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/' + md5_1 + '/' + md5_1 + md5_2 + '/' +
+            image_name_underline + '/320px-' + image_name_underline;
+
+        let possibleLabels = [
+            object.labels['en-gb'],
+            object.labels['en-us'],
+            object.labels.en,
+            object.aliases?.en && object.aliases.en[0] // returns first false value or last true value
+        ]
+
+        let label = item.species_name;
+        let hasCommonName = false;
+
+        for (let possibleLabel of possibleLabels) {
+            if (possibleLabel && possibleLabel !== label) {
+                label = possibleLabel;
+                hasCommonName = true;
+                break;
+            }
+        }
+
+        let wiki_url = object.sitelinks?.enwiki?.url; // null-safe traversal
+
+        return { image_url, label, wiki_url, hasCommonName }; // uses var names to generate key names automatically
+    })
+}
+
+async function get_all_animal_data() {
+    let urls = await get_query_urls(9);
+
+    let info_promises = [];
+
+    for (let item of urls) {
+        info_promises.push(get_single_animal_data(item));
+    }
+
+    return Promise.all(info_promises);
+
+}
+
+let data = await get_all_animal_data();
+
+Alpine.store('data', data);
+Alpine.start();
