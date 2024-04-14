@@ -23,6 +23,10 @@ body {
   padding: 1rem;
 }
 
+#question {
+  padding-bottom: 1em; /*Q*/
+}
+
 #image-container {
   /* stretch to fill the rest of the flexbox */
   flex: auto;
@@ -72,10 +76,9 @@ img:hover {
   left: 0;
 }
 
-#eval-pos,
-#eval-neg {
+.eval {
   position: absolute;
-  top: 51.5%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 270px;
@@ -88,10 +91,12 @@ img:hover {
 }
 
 #again {
-  margin: 1rem;
+  margin-top: 1rem;
   font-size: 1rem;
 }
 
 #again:hover {
   cursor: pointer;
 }
+
+[x-cloak] { display: none !important; }

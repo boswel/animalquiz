@@ -1,6 +1,8 @@
 import md5Hex from 'https://cdn.jsdelivr.net/npm/md5-hex@4.0.0/+esm'
 import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/+esm' 
 
+let numberOfPictures = 9;
+
 async function get_query_urls(int) {
     return fetch('/info?number=' + int)
     .then(response => response.json())
@@ -11,7 +13,9 @@ async function get_single_animal_data(item) {
     return fetch(item.query_url)
     .then(response => response.json())
     .then(object => {
-        let image_name = object['statements']['P18'][0]['value']['content'];
+        let image_name = object['statements']['P18'][0]['value']['content'];// Q: P18 can be undefined, how do I safeguard?
+        
+//        if (image_name) {
         let image_name_underline = image_name.replaceAll(' ', '_');
 
         let md5 = md5Hex(image_name_underline);
@@ -20,6 +24,7 @@ async function get_single_animal_data(item) {
 
         let image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/' + md5_1 + '/' + md5_1 + md5_2 + '/' +
             image_name_underline + '/320px-' + image_name_underline;
+//        }
 
         let possibleLabels = [
             object.labels['en-gb'],
@@ -46,7 +51,7 @@ async function get_single_animal_data(item) {
 }
 
 async function get_all_animal_data() {
-    let urls = await get_query_urls(9);
+    let urls = await get_query_urls(numberOfPictures);
 
     let info_promises = [];
 
@@ -55,10 +60,18 @@ async function get_all_animal_data() {
     }
 
     return Promise.all(info_promises);
-
 }
 
-let data = await get_all_animal_data();
 
-Alpine.store('data', data);
+let info = await get_all_animal_data();
+let target = info[Math.floor(Math.random() * numberOfPictures)];
+
+Alpine.store('data', {
+    info: info,
+    target: target,
+    answerStatus: null
+});
+
 Alpine.start();
+
+// Q: Why are some images ("resources") "blocked by OpaqueResponseBlocking"? 

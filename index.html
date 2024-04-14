@@ -14,23 +14,71 @@
   <div 
     id="container" 
     x-data="{ 
-      data: $store.data,
-      target: ''
+      data: $store.data
     }"     
   >
-
     <h1>Animal Quiz</h1>
-    
-    <div>Which of the pictures shows (something related to) whichever animal?</div>
+    <div x-cloak id="question">Which of the pictures shows (something related to) 
+      <span
+        x-text="data.target.hasCommonName ? ' the ' + data.target.label : data.target.label" 
+        :style="data.target.hasCommonName ? '' : 'font-style: italic'"
+      >
+      </span>
+      ?
+    </div>
     <div id="image-container">
       <div id="image-grid">
-        <template x-for="animal, index in data" :key="index">
-          <img :src="animal.image_url"></img>
+        <template x-for="animal, index in data.info" :key="index">
+          <div>
+            <img 
+              :src="animal.image_url"
+              :class="animal.evaluate"
+              @click="
+                data.answerStatus = animal.label === data.target.label
+                if (data.answerStatus === false) {
+                  setTimeout(() => data.answerStatus = undefined, 1000);
+                }
+                animal.evaluate = data.answerStatus ? 'correct' : 'incorrect'"
+            >
+          </img>
+          </div>
         </template>
       </div>
     </div>
+
+    <div
+      x-cloak 
+      class="eval"
+      x-show="data.answerStatus === false"
+      @click="data.answerStatus = null"
+    >
+      Try again!
+    </div>
+
+    <div 
+      x-cloak
+      id="prevent-interaction" 
+      x-show="data.answerStatus === true">
+      <div 
+        class="eval"
+      >
+        That's correct!
+        <br>
+        You can find more information on
+        <span 
+          x-text="data.target.hasCommonName ? ' the ' + data.target.label : data.target.label"
+          :style="data.target.hasCommonName ? '' : 'font-style: italic'"
+        >
+        </span>
+        <a target="_blank" :href="data.target.wiki_url || 'https://www.ecosia.org/search?method=index&q=' + data.target.label">here</a>.
+        <br>
+        <button id="again" @click="location.reload()">Play again</button>
+      </div>
+    </div>
+
   </div>
  
 </body>
 
 </html>
+
