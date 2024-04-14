@@ -13,9 +13,7 @@ async function get_single_animal_data(item) {
     return fetch(item.query_url)
     .then(response => response.json())
     .then(object => {
-        let image_name = object['statements']['P18'][0]['value']['content'];// Q: P18 can be undefined, how do I safeguard?
-        
-//        if (image_name) {
+        let image_name = object['statements']['P18']?.[0]['value']['content']; // Q: P18 can be undefined, how do I safeguard?
         let image_name_underline = image_name.replaceAll(' ', '_');
 
         let md5 = md5Hex(image_name_underline);
@@ -24,7 +22,6 @@ async function get_single_animal_data(item) {
 
         let image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/' + md5_1 + '/' + md5_1 + md5_2 + '/' +
             image_name_underline + '/320px-' + image_name_underline;
-//        }
 
         let possibleLabels = [
             object.labels['en-gb'],

@@ -65,7 +65,7 @@
         <br>
         You can find more information on
         <span 
-          x-text="data.target.hasCommonName && match(/.*'|.*’/) ? ' the ' + data.target.label : data.target.label"
+          x-text="data.target.hasCommonName && !data.target.label.match(/.*'|.*’/) ? ' the ' + data.target.label : data.target.label"
           :style="data.target.hasCommonName ? '' : 'font-style: italic'"
         >
         </span>
