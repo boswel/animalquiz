@@ -14,8 +14,49 @@ body {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+}
+
 #choice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   background-color: white;
+}
+
+#choice button {
+  height: 200px;
+  width: 255px;
+  font-size: 2rem;
+  text-align: start;
+  color: rgb(255, 237, 214);
+  margin: 0.5rem;
+  position: relative;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+#mammals {
+  background-image: url('images/pexels-ivan-cujic-2265247-small.jpg');
+}
+
+#mammals span {
+  position: absolute;
+  left: 8%;
+  top: 70%;
+}
+
+#birds {
+  background-image: url('images/pexels-tim-mossholder-1618424-small.jpg');
+}
+
+#birds span {
+  position: absolute;
+  left: 8%;
+  top: 70%;
 }
 
 #container {
