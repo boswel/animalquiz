@@ -7,10 +7,10 @@ let animalClass = '';
 let choiceDiv = document.getElementById('choice');
 let choiceButtons = choiceDiv.querySelectorAll('button');
 
+
 for (let button of choiceButtons) {
     button.onclick = function() {
         animalClass = button.getAttribute('id');
-        console.log(animalClass);
         choiceDiv.hidden = true;
         startGame();
     }
@@ -31,7 +31,6 @@ async function startGame() {
 }
 
 
-
 async function get_query_urls(int, animalClass) {
     return fetch('/info', {
         method: 'POST',
@@ -40,9 +39,6 @@ async function get_query_urls(int, animalClass) {
     })
     .then(response => response.json())
 }
-
-
-
 
 
 async function get_single_animal_data(item) {
@@ -83,6 +79,7 @@ async function get_single_animal_data(item) {
         return { image_url, label, wiki_url, hasCommonName }; // uses var names to generate key names automatically
     })
 }
+
 
 async function get_all_animal_data() {
     let urls = await get_query_urls(numberOfPictures, animalClass);

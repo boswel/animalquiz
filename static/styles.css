@@ -1,3 +1,5 @@
+@import url(https://fonts.bunny.net/css?family=akaya-kanadaka:400|alata:400|albert-sans:300|amarante:400|antic:400);
+
 *,
 *::before,
 *::after {
@@ -6,7 +8,9 @@
 
 html {
   height: 100%;
-  font-family: sans-serif;
+ 
+/* font-family: 'Alata', sans-serif; */
+font-family: 'Albert Sans', sans-serif;
 }
 
 body {
@@ -16,6 +20,12 @@ body {
 
 h1 {
   text-align: center;
+  font-weight: bold;
+}
+
+button {
+  font-family: 'Albert Sans', sans-serif;
+  cursor: pointer;
 }
 
 #choice {
@@ -29,6 +39,7 @@ h1 {
   height: 200px;
   width: 255px;
   font-size: 2rem;
+  font-weight: bold;
   text-align: start;
   color: rgb(255, 237, 214);
   margin: 0.5rem;

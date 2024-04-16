@@ -16,13 +16,13 @@
     <button id="mammals"><span>Mammals</span></button>
     <button id="birds"><span>Birds</span></button>
   </div>
+
   <div 
     id="container" 
     x-data="{ 
       data: $store.data
     }"     
-  >
-    
+  >    
     <div x-cloak id="question">Which of the pictures shows (something related to) 
       <span
         x-text="data.target.hasCommonName && !data.target.label.match(/.*'|.*’/) ? ' the ' + data.target.label : data.target.label" 
