@@ -1,19 +1,61 @@
 import md5Hex from 'https://cdn.jsdelivr.net/npm/md5-hex@4.0.0/+esm'
 import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/+esm' 
 
-let numberOfPictures = 9;
 
-async function get_query_urls(int) {
-    return fetch('/info?number=' + int)
+let numberOfPictures = 9;
+let animalClass = '';
+let mammalsButton = document.getElementById('mammals');
+let birdsButton = document.getElementById('birds');
+let choiceDiv = document.getElementById('choice');
+
+mammalsButton.onclick = function() {
+    animalClass = 'mammals';
+    choiceDiv.hidden = true;
+    startGame();
+}
+
+birdsButton.onclick = function() {
+    animalClass = 'birds'
+    choiceDiv.hidden = true;
+    startGame();
+}
+
+
+async function startGame() {
+    let info = await get_all_animal_data();
+    console.log(info)
+    let target = info[Math.floor(Math.random() * numberOfPictures)];
+
+    Alpine.store('data', {
+        info: info,
+        target: target,
+        answerStatus: null
+    });
+
+    Alpine.start();
+}
+
+
+
+async function get_query_urls(int, animalClass) {
+    return fetch('/info', {
+        method: 'POST',
+        body: JSON.stringify({number: int, animalClass: animalClass}),
+        headers: {'Content-type': 'application/json; charset=UTF-8'}
+    })
     .then(response => response.json())
 }
+
+
+
+
 
 async function get_single_animal_data(item) {
 
     return fetch(item.query_url)
     .then(response => response.json())
     .then(object => {
-        let image_name = object['statements']['P18']?.[0]['value']['content']; // Q: P18 can be undefined, how do I safeguard?
+        let image_name = object['statements']['P18']?.[0]['value']['content']; 
         let image_name_underline = image_name.replaceAll(' ', '_');
 
         let md5 = md5Hex(image_name_underline);
@@ -48,7 +90,7 @@ async function get_single_animal_data(item) {
 }
 
 async function get_all_animal_data() {
-    let urls = await get_query_urls(numberOfPictures);
+    let urls = await get_query_urls(numberOfPictures, animalClass);
 
     let info_promises = [];
 
@@ -60,15 +102,5 @@ async function get_all_animal_data() {
 }
 
 
-let info = await get_all_animal_data();
-let target = info[Math.floor(Math.random() * numberOfPictures)];
 
-Alpine.store('data', {
-    info: info,
-    target: target,
-    answerStatus: null
-});
 
-Alpine.start();
-
-// Q: Why are some images ("resources") "blocked by OpaqueResponseBlocking"? 
