@@ -17,6 +17,5 @@ def get_urls():
     number = request.json['number']
     animalClass = request.json['animalClass']
 
-    print(number, animalClass)
     return get_query_urls(number, animalClass)
     
