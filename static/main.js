@@ -1,6 +1,7 @@
 import md5Hex from 'https://cdn.jsdelivr.net/npm/md5-hex@4.0.0/+esm'
 import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/+esm' 
 
+Alpine.store('start', {startGame: startGame});
 
 let numberOfPictures = 9;
 let animalClass = '';
@@ -27,7 +28,7 @@ async function startGame() {
         answerStatus: null
     });
 
-    Alpine.start();
+    Alpine.start(); // should not start Alpine several times; from the 3rd time, additional images are loaded; cannot remove .start from here (to global or button.onclick) => errors
 }
 
 

@@ -39,7 +39,7 @@
     <div id="image-container">
       <div id="image-grid">
         <template x-for="animal, index in data.info" :key="index">
-          <div>
+          <div class="img-div">
             <img 
               :src="animal.image_url"
               :class="animal.evaluate"
@@ -82,7 +82,16 @@
         </span>
         <a target="_blank" :href="data.target.wiki_url || 'https://www.ecosia.org/search?method=index&q=' + data.target.label">here</a>.
         <br>
-        <button id="again" @click="location.reload()">Play again</button>
+        <button 
+          id="again" 
+          @click="
+          images = document.querySelectorAll('div.img-div');
+          for (let i = 0; i < images.length; i++) {
+            images[i].parentNode.removeChild(images[i]);
+          }
+          $store.start.startGame()
+          "
+        >Play again</button>
       </div>
     </div>
   </div>
