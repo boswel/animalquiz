@@ -8,15 +8,13 @@ let animalClass = '';
 let choiceDiv = document.getElementById('choice');
 let choiceButtons = choiceDiv.querySelectorAll('button');
 
-
 for (let button of choiceButtons) {
     button.onclick = function() {
         animalClass = button.getAttribute('id');
         choiceDiv.hidden = true;
-        startGame();
+        startGame()
     }
 }
-
 
 async function startGame() {
     let info = await get_all_animal_data();
@@ -28,7 +26,9 @@ async function startGame() {
         answerStatus: null
     });
 
-    Alpine.start(); // should not start Alpine several times; from the 3rd time, additional images are loaded; cannot remove .start from here (to global or button.onclick) => errors
+    Alpine.start(); // should not start Alpine several times; from the 3rd game onwards, additional images are loaded 
+                    // cannot remove .start from here (to global or button.onclick) => lots of errors
+                    // startGame().then(Alpine.start()) neither helps (in button.onclick)
 }
 
 
