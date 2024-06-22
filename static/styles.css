@@ -28,6 +28,10 @@ button {
   cursor: pointer;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 #choice {
   display: flex;
   flex-wrap: wrap;
@@ -35,39 +39,25 @@ button {
   background-color: white;
 }
 
-#choice button {
+#choice a {
+  padding: 0.5rem;
+  position: relative;
+}
+
+#choice img {
   height: 200px;
   width: 255px;
+}
+
+#choice span {
+  position: absolute;
+  left: 8%;
+  top: 65%;
   font-size: 2rem;
   font-weight: bold;
   text-align: start;
   color: rgb(255, 237, 214);
   margin: 0.5rem;
-  position: relative;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-#mammals {
-  background-image: url('images/pexels-ivan-cujic-2265247-small.jpg');
-}
-
-#mammals span {
-  position: absolute;
-  left: 8%;
-  top: 70%;
-}
-
-#birds {
-  background-image: url('images/pexels-tim-mossholder-1618424-small.jpg');
-}
-
-#birds span {
-  position: absolute;
-  left: 8%;
-  top: 70%;
 }
 
 #container {
