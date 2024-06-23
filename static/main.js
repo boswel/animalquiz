@@ -5,12 +5,12 @@ import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/+esm'
 let numberOfPictures = 9;
 let animalClass = '';
 let choiceDiv = document.getElementById('choice');
-let choiceButtons = choiceDiv.querySelectorAll('button');
+let choiceLinks = choiceDiv.querySelectorAll('a');
 
 
-for (let button of choiceButtons) {
-    button.onclick = function() {
-        animalClass = button.getAttribute('id');
+for (let link of choiceLinks) {
+    link.onclick = function() { // the onclick isn't fired (or startGame isn't called) because the href reloads the page (with the URL query)
+        animalClass = new URLSearchParams(window.location.search).get('animalclass');
         choiceDiv.hidden = true;
         startGame();
     }
