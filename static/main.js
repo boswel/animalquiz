@@ -13,6 +13,7 @@ async function startGame() {
     let target = info[Math.floor(Math.random() * numberOfPictures)];
 
     Alpine.store('data', {
+        animalclass: animalClass,
         info: info,
         target: target,
         answerStatus: null

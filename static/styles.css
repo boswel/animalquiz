@@ -60,6 +60,22 @@ button {
   margin: 0.5rem;
 }
 
+#switch-class {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  background-color: white;
+}
+
+#switch-class a {
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+#switch-class img {
+  width: 4rem;
+}
+
 #container {
   display: flex;
   flex-direction: column;
@@ -70,7 +86,7 @@ button {
 }
 
 #question {
-  padding-bottom: 1em; /*Q*/
+  padding-bottom: 1em; 
 }
 
 #image-container {
