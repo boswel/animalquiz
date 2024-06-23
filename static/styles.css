@@ -136,13 +136,31 @@ img:hover {
   text-align: center;
 }
 
-#again {
-  margin-top: 1rem;
-  font-size: 1rem;
+#choice-again {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* background-color: white; */
 }
 
-#again:hover {
-  cursor: pointer;
+#choice-again a {
+  padding: 0.5rem;
+  position: relative;
+}
+
+#choice-again img {
+  width: 6rem;
+}
+
+#choice-again span {
+  position: absolute;
+  left: 8%;
+  top: 55%;
+  /* font-size: 2rem; */
+  font-weight: bold;
+  text-align: start;
+  color: rgb(255, 237, 214);
+  margin: 0.5rem;
 }
 
 [x-cloak] { display: none !important; }

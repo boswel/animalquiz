@@ -77,7 +77,18 @@
         </span>
         <a target="_blank" :href="data.target.wiki_url || 'https://www.ecosia.org/search?method=index&q=' + data.target.label">here</a>.
         <br>
-        <button id="again" @click="location.reload()">Play again</button>
+        <br>
+        Play again:
+        <div id="choice-again">
+          <a href="quiz?animalclass=mammals">
+            <img src="static/images/pexels-ivan-cujic-2265247-small.jpg">
+            <span>Mammals</span>
+          </a>
+          <a href="quiz?animalclass=birds">
+            <img src="static/images/pexels-tim-mossholder-1618424-small.jpg">
+            <span>Birds</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
