@@ -65,11 +65,9 @@ button {
   flex-wrap: wrap;
   justify-content: right;
   background-color: white;
-}
-
-#switch-class a {
-  padding-top: 0.5rem;
-  padding-right: 0.5rem;
+  max-width: 960px;
+  margin: auto;
+  padding: 1rem;
 }
 
 #switch-class img {

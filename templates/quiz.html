@@ -12,22 +12,14 @@
 
 <body>
   <div 
+    x-cloak 
     id="switch-class"
-    x-data="{ animalclass: $store.animalclass }"
+    x-data="{ animalclass: $store.data.animalclass }"
   >
   <!-- only the link should be shown that leads to the quiz with the other animal class, not the one being played at the moment -->
   <!-- I tried various versions of x-show and x-if in various places but they seem to do either nothing (x-show) or the opposite thing (x-if - img does not show on load but appears and stays there)-->
-    <template x-if="animalclass !== 'mammals'">
-      <a href="quiz?animalclass=mammals">
-        <img src="static/images/pexels-ivan-cujic-2265247-small.jpg">
-      </a>
-    </template>
-    <template x-if="animalclass !== 'birds'">
-      <a href="quiz?animalclass=birds">
-        <img src="static/images/pexels-tim-mossholder-1618424-small.jpg">
-      </a>
-    </template>
-    <a x-show.important="animalclass !== 'mammals'" href="quiz?animalclass=mammals">
+    
+    <a x-show="animalclass !== 'mammals'" href="quiz?animalclass=mammals">
       <img src="static/images/pexels-ivan-cujic-2265247-small.jpg">
     </a>
     <a x-show="animalclass !== 'birds'" href="quiz?animalclass=birds">
