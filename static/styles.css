@@ -28,6 +28,10 @@ button {
   cursor: pointer;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 #choice {
   display: flex;
   flex-wrap: wrap;
@@ -35,39 +39,39 @@ button {
   background-color: white;
 }
 
-#choice button {
+#choice a {
+  padding: 0.5rem;
+  position: relative;
+}
+
+#choice img {
   height: 200px;
   width: 255px;
+}
+
+#choice span {
+  position: absolute;
+  left: 8%;
+  top: 65%;
   font-size: 2rem;
   font-weight: bold;
   text-align: start;
   color: rgb(255, 237, 214);
   margin: 0.5rem;
-  position: relative;
 }
 
-[hidden] {
-  display: none !important;
+#switch-class {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  background-color: white;
+  max-width: 960px;
+  margin: auto;
+  padding: 1rem;
 }
 
-#mammals {
-  background-image: url('images/pexels-ivan-cujic-2265247-small.jpg');
-}
-
-#mammals span {
-  position: absolute;
-  left: 8%;
-  top: 70%;
-}
-
-#birds {
-  background-image: url('images/pexels-tim-mossholder-1618424-small.jpg');
-}
-
-#birds span {
-  position: absolute;
-  left: 8%;
-  top: 70%;
+#switch-class img {
+  width: 4rem;
 }
 
 #container {
@@ -80,7 +84,7 @@ button {
 }
 
 #question {
-  padding-bottom: 1em; /*Q*/
+  padding-bottom: 1em; 
 }
 
 #image-container {
@@ -146,13 +150,31 @@ img:hover {
   text-align: center;
 }
 
-#again {
-  margin-top: 1rem;
-  font-size: 1rem;
+#choice-again {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* background-color: white; */
 }
 
-#again:hover {
-  cursor: pointer;
+#choice-again a {
+  padding: 0.5rem;
+  position: relative;
+}
+
+#choice-again img {
+  width: 6rem;
+}
+
+#choice-again span {
+  position: absolute;
+  left: 8%;
+  top: 55%;
+  /* font-size: 2rem; */
+  font-weight: bold;
+  text-align: start;
+  color: rgb(255, 237, 214);
+  margin: 0.5rem;
 }
 
 [x-cloak] { display: none !important; }
