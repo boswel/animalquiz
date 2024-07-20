@@ -3,18 +3,9 @@ import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/+esm'
 
 
 let numberOfPictures = 9;
-let animalClass = '';
-let choiceDiv = document.getElementById('choice');
-let choiceButtons = choiceDiv.querySelectorAll('button');
-
-
-for (let button of choiceButtons) {
-    button.onclick = function() {
-        animalClass = button.getAttribute('id');
-        choiceDiv.hidden = true;
-        startGame();
-    }
-}
+let animalClass = new URLSearchParams(window.location.search).get('animalclass');
+startGame();
+ 
 
 
 async function startGame() {
@@ -22,6 +13,7 @@ async function startGame() {
     let target = info[Math.floor(Math.random() * numberOfPictures)];
 
     Alpine.store('data', {
+        animalclass: animalClass,
         info: info,
         target: target,
         answerStatus: null

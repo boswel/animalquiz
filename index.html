@@ -6,87 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="static/styles.css">
-  <script src="static/main.js" type="module"></script>
   <title>AnimalQuiz</title>
 </head>
 
 <body>
   <h1>Animal Quiz</h1>
   <div id="choice">
-    <button id="mammals"><span>Mammals</span></button>
-    <button id="birds"><span>Birds</span></button>
+    <a href="quiz?animalclass=mammals">
+      <img src="static/images/pexels-ivan-cujic-2265247-small.jpg">
+      <span>Mammals</span>
+    </a>
+    <a href="quiz?animalclass=birds">
+      <img src="static/images/pexels-tim-mossholder-1618424-small.jpg">
+      <span>Birds</span>
+    </a>
   </div>
-
-  <div 
-    id="container" 
-    x-data="{ 
-      data: $store.data,      
-      isLatin: !$store.data.target.hasCommonName,
-      hasApostrophe: $store.data.target.label.match(/'|’/)    
-    }"     
-  >    
-    <div
-      id="question"
-      x-cloak
-    >
-      Which of the pictures shows (something related to) 
-      <span
-        x-text="(isLatin || hasApostrophe ? '' : ' the ') + data.target.label"
-        :style="isLatin && 'font-style: italic'"
-      >
-      </span>?
-    </div>
-    <div id="image-container">
-      <div id="image-grid">
-        <template x-for="animal, index in data.info" :key="index">
-          <div>
-            <img 
-              :src="animal.image_url"
-              :class="animal.evaluate"
-              @click="
-                data.answerStatus = animal.label === data.target.label;
-                if (data.answerStatus === false) {
-                  setTimeout(() => data.answerStatus = undefined, 1000);
-                }
-                animal.evaluate = data.answerStatus ? 'correct' : 'incorrect'"
-            >
-          </img>
-          </div>
-        </template>
-      </div>
-    </div>
-
-    <div
-      x-cloak 
-      class="eval"
-      x-show="data.answerStatus === false"
-      @click="data.answerStatus = null"
-    >
-      Try again!
-    </div>
-
-    <div 
-      x-cloak
-      id="prevent-interaction" 
-      x-show="data.answerStatus === true">
-      <div 
-        class="eval"
-      >
-        That's correct!
-        <br>
-        You can find more information on
-        <span 
-          x-text="(isLatin || hasApostrophe ? '' : ' the ') + data.target.label"
-          :style="isLatin && 'font-style: italic'"
-        >
-        </span>
-        <a target="_blank" :href="data.target.wiki_url || 'https://www.ecosia.org/search?method=index&q=' + data.target.label">here</a>.
-        <br>
-        <button id="again" @click="location.reload()">Play again</button>
-      </div>
-    </div>
-  </div>
- 
 </body>
 
 </html>
