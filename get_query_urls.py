@@ -18,7 +18,7 @@ def get_query_urls(number, animalClass):
     items = animals.sample(number) 
     
     urls = []
-    base_url = 'https://www.wikidata.org/w/rest.php/wikibase/v0'
+    base_url = 'https://www.wikidata.org/w/rest.php/wikibase/v1'
 
     for index, item in items.iterrows():
         query_url = base_url + '/entities/items/' + item['id']
